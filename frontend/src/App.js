@@ -22,14 +22,14 @@ function App() {
   //for RtcPeerConnection
   const RtcConnection = () => {
     const Ic = new RTCPeerConnection({
-      // iceServers: [
-      //   { urls: "stun:stun.stunprotocol.org" },
-      //   {
-      //     urls: "turn:numb.viagenie.ca",
-      //     credential: "muazkh",
-      //     username: "webrtc@live.com",
-      //   },
-      // ],
+      iceServers: [
+        { urls: "stun:stun.stunprotocol.org" },
+        {
+          urls: "turn:numb.viagenie.ca",
+          credential: "muazkh",
+          username: "webrtc@live.com",
+        },
+      ],
     });
     window.mediaStream.getTracks().forEach((track) => {
       Ic.addTrack(track, window.mediaStream);
