@@ -3,10 +3,30 @@ const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 
+const meetSheet = [];
+
 io.on("connection", (socket) => {
   console.log("\x1b[43m\x1b[30m", " someone connected! ", "\x1b[0m");
   socket.on("join room", (roomId) => {
-    console.log(roomId);
+    if (meetSheet[roomId]) {
+      meetSheet[roomId].push(socket.id);
+    } else {
+      meetSheet[roomId] = [socket.id];
+    }
+    console.log(meetSheet);
+    const UserTwo = meetSheet[roomId].find((Id) => Id !== socket.id);
+    if (UserTwo) {
+      socket.emit("user-two", UserTwo);
+      socket.to(UserTwo).emit("user joined", socket.id);
+    }
+  });
+  socket.on("offer", (payload) => {
+    console.log("resided Offer: ");
+    socket.to(meetSheet[payload.target][0]).emit("offer", payload.offer);
+  });
+  socket.on("answer", (payload) => {
+    console.log("resided answer: ");
+    socket.to(meetSheet[payload.target][1]).emit("answer", payload.answer);
   });
 });
 
