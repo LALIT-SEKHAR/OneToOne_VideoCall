@@ -15,16 +15,18 @@ export const RtcSender = () => {
     peer.addTrack(track, window.mediaStream);
   });
   peer.onicecandidate = (e) => {
-    console.log("Ice Candidate");
     const payload = {
       target: window.callId,
       caller: window.socket.id,
-      offer: peer.localDescription,
+      ice_candidate: JSON.stringify(e.candidate),
     };
-    window.socket.emit("offer", payload);
+    window.socket.emit("ice_candidate", payload);
+    console.log("Ice Candidate");
   };
-  peer.ontrack = (e) => {
+  peer.ontrack = async (e) => {
     console.log("Sender Track", e);
+    await window.remoteStream.addTrack(e.track, window.remoteStream);
+    document.getElementById("ClintVideoTag").srcObject = window.remoteStream;
   };
   peer.onnegotiationneeded = (e) => {
     peer
@@ -33,19 +35,19 @@ export const RtcSender = () => {
         return peer.setLocalDescription(offer);
       })
       .then(() => {
-        // const payload = {
-        //   target: window.callId,
-        //   caller: window.socket.id,
-        //   offer: peer.localDescription,
-        // };
-        // window.socket.emit("offer", payload);
+        const payload = {
+          target: window.callId,
+          caller: window.socket.id,
+          offer: peer.localDescription,
+        };
+        window.socket.emit("offer", payload);
         console.log("Offer send successfully");
       })
       .catch((error) =>
         console.error({ message: "WebRTC localDescription error", error })
       );
   };
-  window.myPeer = peer;
+  window.Peer = peer;
 };
 
 //for RtcPeerConnection clint
@@ -69,10 +71,10 @@ export const RtcReceive = ({ offer }) => {
       const payload = {
         target: window.callId,
         caller: window.socket.id,
-        answer: peer.localDescription,
+        ice_candidate: JSON.stringify(e.candidate),
       };
-      window.socket.emit("answer", payload);
-      console.log("Remote answer set successfully");
+      window.socket.emit("ice_candidate", payload);
+      console.log("Ice Candidate");
     };
     peer.ontrack = async (e) => {
       console.log("Receive Track", e);
@@ -88,14 +90,14 @@ export const RtcReceive = ({ offer }) => {
       .then((answer) => peer.setLocalDescription(answer))
       .then((e) => {
         console.log("Answer created");
-        // const payload = {
-        //   target: window.callId,
-        //   caller: window.socket.id,
-        //   answer: peer.localDescription,
-        // };
-        // window.socket.emit("answer", payload);
-        // console.log("answer set successfully");
-        window.clintPeer = peer;
+        const payload = {
+          target: window.callId,
+          caller: window.socket.id,
+          answer: peer.localDescription,
+        };
+        window.socket.emit("answer", payload);
+        console.log("Remote answer set successfully");
+        window.Peer = peer;
         resolve(peer);
       })
       .catch((error) =>
@@ -106,7 +108,15 @@ export const RtcReceive = ({ offer }) => {
 
 //for RtcPeerConnection clint
 export const RtcSetAnswer = ({ answer }) => {
-  window.myPeer.setRemoteDescription(answer).then((e) => {
+  window.Peer.setRemoteDescription(answer).then((e) => {
     console.log("remote answer Set Successfully");
   });
+};
+
+//for Set Ice_candidate
+export const RtcSetIce_candidate = ({ Ice_candidate }) => {
+  console.log("Ice_candidate: ", Ice_candidate);
+  window.Peer.addIceCandidate(JSON.parse(Ice_candidate.ice_candidate)).catch(
+    (error) => console.log("ERROR Ice_candidate: ", error.message)
+  );
 };

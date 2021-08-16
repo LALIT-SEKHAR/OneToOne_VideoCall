@@ -28,6 +28,13 @@ io.on("connection", (socket) => {
     console.log("resided answer: ");
     socket.to(meetSheet[payload.target][1]).emit("answer", payload.answer);
   });
+  socket.on("ice_candidate", (payload) => {
+    if (meetSheet[payload.target][1] === payload.caller) {
+      socket.to(meetSheet[payload.target][0]).emit("ice_candidate", payload);
+    } else {
+      socket.to(meetSheet[payload.target][1]).emit("ice_candidate", payload);
+    }
+  });
 });
 
 const PORT = 8000 || process.env.PORT;

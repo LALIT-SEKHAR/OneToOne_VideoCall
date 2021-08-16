@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
-import { RtcReceive, RtcSetAnswer } from "./RtcPeerHelper";
+import { RtcReceive, RtcSetAnswer, RtcSetIce_candidate } from "./RtcPeerHelper";
 
 export const ServerCommunication = () => {
   return new Promise((resolve) => {
@@ -19,6 +19,10 @@ export const ServerCommunication = () => {
     socket.on("answer", (answer) => {
       console.log("got an answer");
       RtcSetAnswer({ answer: answer });
+    });
+    socket.on("ice_candidate", (Ice_candidate) => {
+      console.log("got an ice_candidate");
+      RtcSetIce_candidate({ Ice_candidate: Ice_candidate });
     });
     socket.on("connect", function () {
       window.socket = socket;

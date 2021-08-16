@@ -17,7 +17,8 @@ const CallRoom = () => {
     })
     
     const init = async () => {
-        window.callId = callId
+        window.callId = callId;
+        window.remoteStream = new MediaStream();
         await getMediaStream()
         VideoTag.current.srcObject = window.mediaStream;
         await ServerCommunication()
@@ -28,6 +29,7 @@ const CallRoom = () => {
         <div>
             <h1>CallRoom : {callId}</h1>
             <video ref={VideoTag} autoPlay muted></video>
+            <video id="ClintVideoTag" autoPlay muted></video>
         </div>
     );
 };
