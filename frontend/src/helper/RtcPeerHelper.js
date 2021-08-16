@@ -1,5 +1,5 @@
 //for RtcPeerConnection
-export const RtcSender = () => {
+export const RtcSender = async () => {
   const peer = new RTCPeerConnection({
     iceServers: [
       { urls: "stun:stun.stunprotocol.org" },
@@ -11,9 +11,10 @@ export const RtcSender = () => {
       },
     ],
   });
-  window.mediaStream.getTracks().forEach((track) => {
+  await window.mediaStream.getTracks().forEach((track) => {
     peer.addTrack(track, window.mediaStream);
   });
+  window.Peer = peer;
   peer.onicecandidate = (e) => {
     const payload = {
       target: window.callId,
@@ -52,7 +53,7 @@ export const RtcSender = () => {
 
 //for RtcPeerConnection clint
 export const RtcReceive = ({ offer }) => {
-  return new Promise((resolve) => {
+  return new Promise(async (resolve) => {
     const peer = new RTCPeerConnection({
       iceServers: [
         { urls: "stun:stun.stunprotocol.org" },
@@ -64,9 +65,10 @@ export const RtcReceive = ({ offer }) => {
         },
       ],
     });
-    window.mediaStream.getTracks().forEach((track) => {
+    await window.mediaStream.getTracks().forEach((track) => {
       peer.addTrack(track, window.mediaStream);
     });
+    window.Peer = peer;
     peer.onicecandidate = (e) => {
       const payload = {
         target: window.callId,
