@@ -3,7 +3,12 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const server = require("http").createServer(app);
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "https://videocall.lalitsekhar.dev",
+    methods: ["GET", "POST"],
+  },
+});
 
 const meetSheet = [];
 
