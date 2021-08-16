@@ -2,7 +2,7 @@
   "name": "webrtc_server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "PROD=true nodemon server.js",
     "postinstall": "cd ./frontend && npm i"
