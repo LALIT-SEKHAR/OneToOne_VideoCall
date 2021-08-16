@@ -118,7 +118,8 @@ export const RtcSetAnswer = ({ answer }) => {
 //for Set Ice_candidate
 export const RtcSetIce_candidate = ({ Ice_candidate }) => {
   console.log("Ice_candidate: ", Ice_candidate);
-  window.Peer.addIceCandidate(JSON.parse(Ice_candidate.ice_candidate)).catch(
-    (error) => console.log("ERROR Ice_candidate: ", error.message)
-  );
+  window.Peer &&
+    window.Peer.addIceCandidate(JSON.parse(Ice_candidate.ice_candidate)).catch(
+      (error) => console.log("ERROR Ice_candidate: ", error.message)
+    );
 };
