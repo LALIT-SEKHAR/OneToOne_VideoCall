@@ -46,14 +46,7 @@ io.on("connection", (socket) => {
   });
 });
 
-if (process.env.PROD) {
-  app.use(express.static(path.join(__dirname, "./frontend/build")));
-  app.get("*", (req, res) => {
-    req.sendFile(path.join(__dirname, "./frontend/build/index.html"));
-  });
-}
-
-const PORT = 8000 || process.env.PORT;
+const PORT = process.env.PORT || 8000;
 server.listen(PORT, () => {
   console.log("\x1b[37m\x1b[44m", ` Listening at ${PORT} `, "\x1b[0m");
 });
