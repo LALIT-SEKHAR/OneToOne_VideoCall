@@ -47,6 +47,24 @@
     width: auto;
 }
 
+.Volume,
+.VolumeOff{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 5em;
+    left: 2em;
+    border: none;
+    background-color: rgb(50, 50, 50);
+    border-radius: 50%;
+    padding: 0.5em;
+}
+.VolumeOff{
+    background-color: red;
+}
+
 @media only screen and (max-width: 860px) {
     .myVideo{
         bottom: 2.5em;
