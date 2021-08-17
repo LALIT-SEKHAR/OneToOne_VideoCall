@@ -3,7 +3,7 @@ import { RtcReceive, RtcSetAnswer, RtcSetIce_candidate } from "./RtcPeerHelper";
 
 export const ServerCommunication = () => {
   return new Promise((resolve) => {
-    const socket = io.connect("https://meet-call.herokuapp.com/");
+    const socket = io.connect("ws://meet-call.herokuapp.com/");
     socket.emit("join room", window.callId);
     socket.emit("user-two", (userId) => {
       // console.log("UserTwo: ", userId);
