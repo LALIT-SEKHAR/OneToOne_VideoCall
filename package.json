@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "engines": {
-    "node": "12.14.0"
-  },
   "scripts": {
     "start": "nodemon server.js",
     "build": "npm install && cd client && npm run build",
