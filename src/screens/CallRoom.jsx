@@ -1,6 +1,7 @@
 import { getMediaStream, RtcSender, ServerCommunication } from 'helper';
 import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
+import CR from "../css/CreateRoom.module.css";
 
 const CallRoom = () => {
 
@@ -26,10 +27,9 @@ const CallRoom = () => {
     }
 
     return (
-        <div>
-            <h1>CallRoom : {callId}</h1>
-            <video ref={VideoTag} autoPlay muted></video>
-            <video id="ClintVideoTag" autoPlay muted></video>
+        <div className={CR.page}>
+            <video className={CR.myVideo} ref={VideoTag} autoPlay muted></video>
+            <video className={CR.clintVideo} id="ClintVideoTag" autoPlay muted></video>
         </div>
     );
 };
