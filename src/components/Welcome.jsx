@@ -26,7 +26,6 @@ const Welcome = () => {
     }
 
     const InitiateCall = async () => {
-        // history.push(`/call/${Id.current}`)
         await getMediaStream();
         window.remoteStream = new MediaStream();
         await ServerCommunication()

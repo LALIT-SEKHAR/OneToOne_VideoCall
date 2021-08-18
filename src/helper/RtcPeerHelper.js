@@ -4,10 +4,9 @@ export const RtcSender = async () => {
     iceServers: [
       { urls: "stun:stun.stunprotocol.org" },
       {
-        urls: "turn:numb.viagenie.ca",
-        credential: "muazkh",
-        // n7dKFzczuh5UN7N
-        username: "webrtc@live.com",
+        urls: process.env.REACT_APP_STUN_URL,
+        credential: process.env.REACT_APP_STUN_URL_PASSWORD,
+        username: process.env.REACT_APP_STUN_USERNAME,
       },
     ],
   });
@@ -22,10 +21,8 @@ export const RtcSender = async () => {
       ice_candidate: JSON.stringify(e.candidate),
     };
     window.socket.emit("ice_candidate", payload);
-    // console.log("Ice Candidate");
   };
   peer.ontrack = async (e) => {
-    // console.log("Sender Track", e);
     await window.remoteStream.addTrack(e.track, window.remoteStream);
     document.getElementById("ClintVideoTag").srcObject = window.remoteStream;
   };
@@ -42,7 +39,6 @@ export const RtcSender = async () => {
           offer: peer.localDescription,
         };
         window.socket.emit("offer", payload);
-        // console.log("Offer send successfully");
       })
       .catch((error) =>
         console.error({ message: "WebRTC localDescription error", error })
@@ -58,10 +54,9 @@ export const RtcReceive = ({ offer }) => {
       iceServers: [
         { urls: "stun:stun.stunprotocol.org" },
         {
-          urls: "turn:numb.viagenie.ca",
-          credential: "muazkh",
-          // n7dKFzczuh5UN7N
-          username: "webrtc@live.com",
+          urls: process.env.REACT_APP_STUN_URL,
+          credential: process.env.REACT_APP_STUN_URL_PASSWORD,
+          username: process.env.REACT_APP_STUN_USERNAME,
         },
       ],
     });
@@ -76,29 +71,22 @@ export const RtcReceive = ({ offer }) => {
         ice_candidate: JSON.stringify(e.candidate),
       };
       window.socket.emit("ice_candidate", payload);
-      // console.log("Ice Candidate");
     };
     peer.ontrack = async (e) => {
-      // console.log("Receive Track", e);
       await window.remoteStream.addTrack(e.track, window.remoteStream);
-
       document.getElementById("ClintVideoTag").srcObject = window.remoteStream;
     };
-    peer.setRemoteDescription(offer).then((e) => {
-      // console.log("offer Set Successfully");
-    });
+    peer.setRemoteDescription(offer).then((e) => {});
     peer
       .createAnswer()
       .then((answer) => peer.setLocalDescription(answer))
       .then((e) => {
-        // console.log("Answer created");
         const payload = {
           target: window.callId,
           caller: window.socket.id,
           answer: peer.localDescription,
         };
         window.socket.emit("answer", payload);
-        // console.log("Remote answer set successfully");
         window.Peer = peer;
         resolve(peer);
       })
@@ -110,17 +98,13 @@ export const RtcReceive = ({ offer }) => {
 
 //for RtcPeerConnection clint
 export const RtcSetAnswer = ({ answer }) => {
-  window.Peer.setRemoteDescription(answer).then((e) => {
-    // console.log("remote answer Set Successfully");
-  });
+  window.Peer.setRemoteDescription(answer).then((e) => {});
 };
 
 //for Set Ice_candidate
 export const RtcSetIce_candidate = ({ Ice_candidate }) => {
-  // console.log("Ice_candidate: ", Ice_candidate);
   window.Peer &&
-    window.Peer.addIceCandidate(JSON.parse(Ice_candidate.ice_candidate))
-      .catch
-      // (error) => console.log("ERROR Ice_candidate: ", error.message)
-      ();
+    window.Peer.addIceCandidate(JSON.parse(Ice_candidate.ice_candidate)).catch(
+      (error) => console.log("ERROR Ice_candidate: ", error.message)
+    );
 };
