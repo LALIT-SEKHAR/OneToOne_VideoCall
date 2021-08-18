@@ -22,6 +22,16 @@ export const RtcSender = async () => {
     };
     window.socket.emit("ice_candidate", payload);
   };
+  peer.onconnectionstatechange = (ev) => {
+    switch (peer.connectionState) {
+      case "disconnected":
+        window.location.replace("/");
+        break;
+
+      default:
+        break;
+    }
+  };
   peer.ontrack = async (e) => {
     await window.remoteStream.addTrack(e.track, window.remoteStream);
     document.getElementById("ClintVideoTag").srcObject = window.remoteStream;
@@ -64,6 +74,16 @@ export const RtcReceive = ({ offer }) => {
       peer.addTrack(track, window.mediaStream);
     });
     window.Peer = peer;
+    peer.onconnectionstatechange = (ev) => {
+      switch (peer.connectionState) {
+        case "disconnected":
+          window.location.replace("/");
+          break;
+
+        default:
+          break;
+      }
+    };
     peer.onicecandidate = (e) => {
       const payload = {
         target: window.callId,
