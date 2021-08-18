@@ -1,0 +1,30 @@
+.contender{
+    position: absolute;
+    bottom: 0px;
+    width: 85%;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    /* background-color: rgba(80, 80, 80, 0.5); */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.btn_original{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(120, 120,120);
+    padding: 0.5em;
+}
+.btn_danger{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(255, 0, 0);
+    padding: 0.5em;
+}

@@ -1,4 +1,4 @@
-import { Welcome } from 'components';
+import { BottomControls, Welcome } from 'components';
 import React, { useRef, useState } from 'react';
 import CR from "../css/CreateRoom.module.css";
 
@@ -20,6 +20,7 @@ const CreateRoom = () => {
                 {!IsConnected && <Welcome/>}
                 <video onPlay={resided} className={CR.clintVideo} ref={ClintVideoTag} id="ClintVideoTag" autoPlay muted></video>
                 <video className={CR.myVideo} ref={VideoTag} autoPlay muted></video>
+                <BottomControls/>
         </div>
     );
 };
