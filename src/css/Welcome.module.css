@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+.Page{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 11;
+    background-color: white;
+}
+.ShearLink_Warper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1em 1em;
+    gap: 1em;
+    background-color: hsl(0, 0%, 89%);
+    border-radius: 0.5em;
+    color: rgb(80, 80, 80);
+    font-family: 'Special Elite', cursive;
+    margin: 0em 1em;
+}
+.ShearLink{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    padding: 1em 1em;
+    background-color: #faebd7;
+    border-radius: 0.5em;
+    color: black;
+}
+.CopyId_btn{
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Form{
+    width: 80%;
+    background-color: #faebd7;
+    height: 2.5em;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 0.5em;
+}
+.input{
+    width: 85%;
+    height: 100%;
+    border-radius: none;
+    background-color: transparent;
+    border: none;
+    padding: 0em 1em;
+    outline: navajowhite;
+}
+.submit_btn{
+    width: 15%;
+    height: 100%;
+    border-radius: none;
+    background-color: #ffca84;
+    border: none;
+    text-transform: uppercase;
+    transition: 1s ease-in-out;
+}
+hr{
+    height: 0.1em;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 80%;
+}
+@keyframes backgroundAn {
+    0%{
+
+    }
+    50%{
+
+    }
+    100%{
+        
+    }
+}
