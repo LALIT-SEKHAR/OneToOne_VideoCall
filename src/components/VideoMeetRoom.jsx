@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React/*, { useState }*/ from 'react';
 import CR from "../css/CreateRoom.module.css";
 
 const VideoMeetRoom = () => {
 
-    const [IsMute, setIsMute] = useState(false)
+    // const [IsMute, setIsMute] = useState(false)
 
-    const MuteToggle = () => {
-        const ClintVideoTag = document.getElementById("ClintVideoTag")
-        ClintVideoTag.muted = !ClintVideoTag.muted
-        setIsMute(!IsMute)
-    }
+    // const MuteToggle = () => {
+    //     const ClintVideoTag = document.getElementById("ClintVideoTag")
+    //     ClintVideoTag.muted = !ClintVideoTag.muted
+    //     setIsMute(!IsMute)
+    // }
     
 
 

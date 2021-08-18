@@ -8,13 +8,13 @@ const CreateRoom = () => {
     const VideoTag = useRef();
     const ClintVideoTag = useRef();
     
-    const [IsMute, setIsMute] = useState(false)
+    // const [IsMute, setIsMute] = useState(false)
     const [IsConnected, setIsConnected] = useState(false);
     
-    const MuteToggle = () => {
-        ClintVideoTag.current.muted = !ClintVideoTag.current.muted
-        setIsMute(!IsMute)
-    }
+    // const MuteToggle = () => {
+    //     ClintVideoTag.current.muted = !ClintVideoTag.current.muted
+    //     setIsMute(!IsMute)
+    // }
     
     const resided =  () => {
         VideoTag.current.srcObject = window.mediaStream;
