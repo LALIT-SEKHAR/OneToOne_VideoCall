@@ -32,6 +32,7 @@
     margin: 0em 1em;
 }
 .ShearLink{
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -85,14 +86,10 @@ hr{
     background-color: rgba(0, 0, 0, 0.5);
     width: 80%;
 }
-@keyframes backgroundAn {
-    0%{
-
+@media only screen and (max-width: 860px) {
+    .ShearLink_Warper{
+        width: 85%;
+        font-size: 0.8em;
     }
-    50%{
-
-    }
-    100%{
-        
-    }
+    
 }

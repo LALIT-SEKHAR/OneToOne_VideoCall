@@ -2,5 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Routes from "Routes";
+import { AppContextProvider } from "hooks";
 
-ReactDOM.render(<Routes />, document.getElementById("root"));
+ReactDOM.render(
+  <AppContextProvider>
+    <Routes />
+  </AppContextProvider>,
+  document.getElementById("root")
+);

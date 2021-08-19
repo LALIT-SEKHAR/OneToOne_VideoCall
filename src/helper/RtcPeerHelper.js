@@ -24,10 +24,12 @@ export const RtcSender = async () => {
   };
   peer.onconnectionstatechange = (ev) => {
     switch (peer.connectionState) {
+      case "connected":
+        console.log("connected");
+        break;
       case "disconnected":
         window.location.replace("/");
         break;
-
       default:
         break;
     }
@@ -85,6 +87,9 @@ export const RtcReceive = ({ offer }) => {
     window.Peer = peer;
     peer.onconnectionstatechange = (ev) => {
       switch (peer.connectionState) {
+        case "connected":
+          console.log("connected");
+          break;
         case "disconnected":
           window.location.replace("/");
           break;
