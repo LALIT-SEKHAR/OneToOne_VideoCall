@@ -15,34 +15,34 @@ const BottomControls = () => {
         var isInFullScreen =
         (document.fullscreenElement && document.fullscreenElement !== null) ||
         (document.webkitFullscreenElement &&
-            document.webkitFullscreenElement !== null) ||
-            (document.mozFullScreenElement &&
-                document.mozFullScreenElement !== null) ||
-                (document.msFullscreenElement && document.msFullscreenElement !== null);
-                if (!isInFullScreen) {
-                    setIsFullScreen(true)
-                    if (section.requestFullscreen) {
-                        section.requestFullscreen();
-                    } else if (section.mozRequestFullScreen) {
-                        section.mozRequestFullScreen();
-                    } else if (section.webkitRequestFullscreen) {
-                        section.webkitRequestFullscreen();
-                    } else if (section.msRequestFullscreen) {
-                        section.msRequestFullscreen();
-                    }
-                } else {
-                    setIsFullScreen(false)
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    } else if (document.webkitExitFullscreen) {
-                        document.webkitExitFullscreen();
-                    } else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen();
-                    } else if (document.msExitFullscreen) {
-                        document.msExitFullscreen();
-                    }
-                }
+        document.webkitFullscreenElement !== null) ||
+        (document.mozFullScreenElement &&
+        document.mozFullScreenElement !== null) ||
+        (document.msFullscreenElement && document.msFullscreenElement !== null);
+        if (!isInFullScreen) {
+            setIsFullScreen(true)
+            if (section.requestFullscreen) {
+                section.requestFullscreen();
+            } else if (section.mozRequestFullScreen) {
+                section.mozRequestFullScreen();
+            } else if (section.webkitRequestFullscreen) {
+                section.webkitRequestFullscreen();
+            } else if (section.msRequestFullscreen) {
+                section.msRequestFullscreen();
             }
+        } else {
+            setIsFullScreen(false)
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        }
+    }
             
             const EndCall = () => {
                 window.Peer.close();
